@@ -1,0 +1,13 @@
+{
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "installCommand": "corepack enable && corepack prepare pnpm@9.0.0 --activate && pnpm install",
+    "buildCommand": "pnpm run build",
+    "outputDirectory": "dist"
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
