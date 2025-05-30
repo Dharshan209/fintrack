@@ -1,0 +1,102 @@
+/* Container and Page */
+.transactions-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffffff;
+  color: #333333; 
+  min-height: 100vh;
+}
+
+/* Title */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a202c; /* Dark gray */
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9fafb; /* Light background */
+  color: #111827;
+}
+
+.new-transaction {
+  background-color: #e2e8f0;
+  color: #1a202c;
+  border: 1px solid #cbd5e0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-transaction:hover {
+  background-color: #cbd5e0;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  cursor: pointer;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+  color: #4b5563; /* Dark gray */
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  color: #1f2937; /* Darker text */
+  border-color: #1f2937;
+}
+
+/* Table */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb; /* Light gray */
+  color: #1f2937;
+}
+
+.transactions-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+/* Status pill */
+.status {
+  background-color: #edf2f7;
+  color: #2d3748;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
