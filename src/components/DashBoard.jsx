@@ -42,7 +42,7 @@ function Dashboard() {
     };
 
     fetchSummary();
-  }, []); // Runs once on component mount
+  }, []);
 
   const handleSubmit = () => {
     console.log('Form submitted!');
