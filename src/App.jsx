@@ -10,7 +10,7 @@ import './App.css';
 
 function Layout() {
   const location = useLocation();
-  const hideHeaderPaths = ['/login', '/signup'];
+  const hideHeaderPaths = ['/', '/signup'];
   const isLoginPage = hideHeaderPaths.includes(location.pathname);
 
 
