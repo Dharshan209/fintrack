@@ -6,6 +6,7 @@ import Dashboard from './components/DashBoard';
 import Transactions from './components/Transactions';
 import Reports from './components/Report';
 import Profile from './components/Profile';
+import Telegram from './components/Telegram';
 import './App.css';
 
 function Layout() {
@@ -24,6 +25,7 @@ function Layout() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/telegram" element={<Telegram />} />
           <Route path="/reports" element={<Reports />} />
         </Routes>
       </main>

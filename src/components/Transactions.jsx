@@ -15,8 +15,12 @@ export default function Transactions() {
       .schema('fintrack')
       .from('transactions')
       .select(`
-        id, transaction_date, description, amount, type,
-        category_id
+        id,
+        transaction_date,
+        description,
+        amount,
+        type,
+        category:category_id (name )
       `)
       .eq('user_id', user_id)
       .order('transaction_date', { ascending: false });
@@ -89,17 +93,17 @@ export default function Transactions() {
           {filteredTransactions.map((txn, idx) => (
             <tr key={txn.id || idx}>
               <td>{txn.transaction_date?.split('T')[0]}</td>
-              <td>{txn.categories?.name || 'Unknown'}</td>
+              <td>{txn.category?.name || 'Unknown'}</td>
               <td>{txn.description}</td>
               <td className={
-               txn.type === 'income' ? 'income-amount' :
-               txn.type === 'expense' ? 'expense-amount' :
-               'saving-amount'
-                }>
-               {txn.type === 'income' ? `+${txn.amount}` :
-               txn.type === 'expense' ? `-${txn.amount}` :
-               `+${txn.amount}`}
-               </td>
+                txn.type === 'income' ? 'income-amount' :
+                txn.type === 'expense' ? 'expense-amount' :
+                'saving-amount'
+              }>
+                {txn.type === 'income' ? `+${txn.amount}` :
+                 txn.type === 'expense' ? `-${txn.amount}` :
+                 `+${txn.amount}`}
+              </td>
               <td><span className="status">{txn.status || 'Completed'}</span></td>
             </tr>
           ))}
