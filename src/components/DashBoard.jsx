@@ -1,7 +1,7 @@
 import './DashBoard.css';
 import { useEffect, useState } from 'react';
 import AddTransactionForm from './AddTransactionForm';
-import IncomevsExpence from './Chart/IncomevsExpence';
+import IncomeExpenseSavingOverTime from './Chart/IncomeExpenseSavingOverTime';
 import { supabase } from '../config/supabase';
 
 function Dashboard() {
@@ -64,7 +64,7 @@ function Dashboard() {
 
       <div className={`cards ${addTransaction ? 'faded' : ''}`}>
         <div className="card">
-          <p className="card-title">Net Worth</p>
+          <p className="card-title">Saving</p>
           <p className="card-value">{saving}</p>
           <p className="card-change positive">+1.2%</p>
         </div>
@@ -79,7 +79,7 @@ function Dashboard() {
           <p className="card-change positive">+0.8%</p>
         </div>
       </div>
-      <IncomevsExpence />
+      <IncomeExpenseSavingOverTime/>
     </div>
   );
 }

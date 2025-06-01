@@ -66,7 +66,7 @@ const Header = () => {
         </div>
 
         <nav className="header-nav">
-          <a href="/dashboard" className="nav-link active">Dashboard</a>
+          <a href="/dashboard" className="nav-link">Dashboard</a>
           <a href="/transactions" className="nav-link">Transactions</a>
           <a href="/telegram" className="nav-link">Telegram</a>
           <a href="/reports" className="nav-link">Reports</a>
