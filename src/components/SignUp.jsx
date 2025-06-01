@@ -59,7 +59,7 @@ function SignUp() {
       }
 
       // Success - redirect to login
-      navigate("/login", { 
+      navigate("/", { 
         state: { message: "Account created successfully! Please log in." }
       });
 
