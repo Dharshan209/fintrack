@@ -14,35 +14,35 @@ function Dashboard() {
     setAddTransaction(!addTransaction);
   };
 
-  useEffect(() => {
-    const fetchSummary = async () => {
-      const id = localStorage.getItem('id');
-      if (!id) {
-        console.error('User ID not found in localStorage');
-        return;
-      }
+  // useEffect(() => {
+  //   const fetchSummary = async () => {
+  //     const id = localStorage.getItem('id');
+  //     if (!id) {
+  //       console.error('User ID not found in localStorage');
+  //       return;
+  //     }
 
-      const { data, error } = await supabase
-        .schema('fintrack')
-        .from('user_financial_summary')
-        .select('*')
-        .eq('user_id', id)
-        .single();
+  //     const { data, error } = await supabase
+  //       .schema('fintrack')
+  //       .from('user_financial_summary')
+  //       .select('*')
+  //       .eq('user_id', id)
+  //       .single();
 
-      if (error) {
-        console.error('Error fetching financial summary:', error);
-        return;
-      }
+  //     if (error) {
+  //       console.error('Error fetching financial summary:', error);
+  //       return;
+  //     }
 
-      if (data) {
-        setSaving(data.total_saving);
-        setIncome(data.total_income);
-        setExpence(data.total_expense);
-      }
-    };
+  //     if (data) {
+  //       setSaving(data.total_saving);
+  //       setIncome(data.total_income);
+  //       setExpence(data.total_expense);
+  //     }
+  //   };
 
-    fetchSummary();
-  }, []);
+  //   fetchSummary();
+  // }, []); // Runs once on component mount
 
   const handleSubmit = () => {
     console.log('Form submitted!');

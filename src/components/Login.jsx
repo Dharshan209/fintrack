@@ -20,7 +20,7 @@ function Login() {
       return;
     }
 
-    localStorage.setItem('id', data.user.id);
+    localStorage.setItem('user_id', data.user.id);
 
     navigate("/");
   } catch (err) {
