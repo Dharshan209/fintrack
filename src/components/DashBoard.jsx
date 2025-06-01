@@ -123,10 +123,6 @@ function Dashboard() {
     <div className="dashboard">
       <div className="dashboard-header">
         <h1>Dashboard</h1>
-        <button className="add-button" onClick={handleAddTransaction}>
-          <Plus size={16} />
-          Add Transaction
-        </button>
       </div>
 
       <p className="subtitle">Here's an overview of your financial status</p>
