@@ -7,6 +7,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function SignUp() {
           {
             id: userId,
             full_name: name,
+            telegram_username:telegram,
             default_currency: "INR",
             timezone: "Asia/Kolkata",  
           },
@@ -110,6 +112,20 @@ function SignUp() {
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="john@example.com"
+                className="form-input"
+                disabled={loading}
+              />
+            </div>
+
+             {/* Full Name Field */}
+            <div className="form-group">
+              <label className="form-label">Telegram Username</label>
+              <input
+                type="text"
+                value={telegram}
+                onChange={(e) => setTelegram(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="@John Doe"
                 className="form-input"
                 disabled={loading}
               />

@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddTransactionForm from './AddTransactionForm';
 import './Transactions.css';
-
-const transactionsData = [
-  { date: '2024-03-15', category: 'Groceries', description: 'Weekly shopping at Local Market', amount: '-$120.50', status: 'Completed' },
-  { date: '2024-03-14', category: 'Salary', description: 'Monthly paycheck from TechCorp', amount: '+$5,000.00', status: 'Completed' },
-  { date: '2024-03-12', category: 'Utilities', description: 'Electricity bill', amount: '-$150.00', status: 'Completed' },
-  { date: '2024-03-10', category: 'Dining', description: 'Dinner at The Bistro', amount: '-$85.75', status: 'Completed' },
-  { date: '2024-03-08', category: 'Rent', description: 'Monthly rent payment', amount: '-$2,000.00', status: 'Completed' },
-  { date: '2024-03-05', category: 'Transportation', description: 'Gasoline for car', amount: '-$45.20', status: 'Completed' },
-  { date: '2024-03-03', category: 'Entertainment', description: 'Movie tickets', amount: '-$30.00', status: 'Completed' },
-  { date: '2024-03-01', category: 'Healthcare', description: "Doctor's visit", amount: '-$100.00', status: 'Completed' },
-  { date: '2024-02-28', category: 'Shopping', description: 'Clothing purchase', amount: '-$250.00', status: 'Completed' },
-  { date: '2024-02-25', category: 'Travel', description: 'Flight ticket', amount: '-$400.00', status: 'Completed' },
-];
+import { supabase } from '../config/supabase';
 
 export default function Transactions() {
+  const [transactions, setTransactions] = useState([]);
   const [addTransaction, setAddTransaction] = useState(false);
   const [selectedTab, setSelectedTab] = useState('All');
+
+  const fetchTransactions = async () => {
+    const user_id = localStorage.getItem('user_id');
+
+    const { data, error } = await supabase
+      .schema('fintrack')
+      .from('transactions')
+      .select(`
+        id, transaction_date, description, amount, type,
+        category_id
+      `)
+      .eq('user_id', user_id)
+      .order('transaction_date', { ascending: false });
+
+    if (error) {
+      console.error("Error fetching transactions:", error.message);
+    } else {
+      setTransactions(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
 
   const handleAddTransaction = () => {
     setAddTransaction(prev => !prev);
   };
 
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     console.log("Form submitted!", data);
+    await fetchTransactions(); 
     setAddTransaction(false);
   };
 
@@ -32,10 +46,10 @@ export default function Transactions() {
     setSelectedTab(tab);
   };
 
-  const filteredTransactions = transactionsData.filter(txn => {
-    if (selectedTab === 'Income') return txn.amount.startsWith('+');
-    if (selectedTab === 'Expenses') return txn.amount.startsWith('-');
-    return true; // 'All'
+  const filteredTransactions = transactions.filter(txn => {
+    if (selectedTab === 'Income') return txn.type === 'income';
+    if (selectedTab === 'Expenses') return txn.type === 'expense';
+    return true;
   });
 
   return (
@@ -73,12 +87,20 @@ export default function Transactions() {
         </thead>
         <tbody>
           {filteredTransactions.map((txn, idx) => (
-            <tr key={idx}>
-              <td>{txn.date}</td>
-              <td>{txn.category}</td>
+            <tr key={txn.id || idx}>
+              <td>{txn.transaction_date?.split('T')[0]}</td>
+              <td>{txn.categories?.name || 'Unknown'}</td>
               <td>{txn.description}</td>
-              <td>{txn.amount}</td>
-              <td><span className="status">{txn.status}</span></td>
+              <td className={
+               txn.type === 'income' ? 'income-amount' :
+               txn.type === 'expense' ? 'expense-amount' :
+               'saving-amount'
+                }>
+               {txn.type === 'income' ? `+${txn.amount}` :
+               txn.type === 'expense' ? `-${txn.amount}` :
+               `+${txn.amount}`}
+               </td>
+              <td><span className="status">{txn.status || 'Completed'}</span></td>
             </tr>
           ))}
         </tbody>

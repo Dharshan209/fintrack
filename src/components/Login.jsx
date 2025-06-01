@@ -8,6 +8,23 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const getname = async (userId) => {
+  const { data, error } = await supabase
+    .schema("fintrack")
+    .from("user_profiles")
+    .select("full_name")
+    .eq("id", userId) // assuming 'id' matches auth user id
+    .single(); // expect one result
+
+  if (error) {
+    console.error("Error fetching user name:", error);
+    return;
+  }
+
+  localStorage.setItem("user_name", data.full_name);
+};
+
+
   const handleLogin = async () => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -19,10 +36,11 @@ function Login() {
       alert("Login failed: " + error.message);
       return;
     }
+localStorage.setItem("user_id", data.user.id);
+localStorage.setItem("user_mail",data.user.email);
+await getname(data.user.id);
+navigate("/");
 
-    localStorage.setItem('user_id', data.user.id);
-
-    navigate("/");
   } catch (err) {
     console.error("Unexpected login error:", err);
     alert("An unexpected error occurred. Please try again.");

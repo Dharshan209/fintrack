@@ -78,6 +78,16 @@
   overflow: hidden;
 }
 
+.income-amount {
+  color: green;
+}
+.expense-amount {
+  color: red;
+}
+.saving-amount {
+  color: orange;
+}
+
 .transactions-table th,
 .transactions-table td {
   padding: 1rem;
