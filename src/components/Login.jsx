@@ -39,7 +39,7 @@ function Login() {
 localStorage.setItem("user_id", data.user.id);
 localStorage.setItem("user_mail",data.user.email);
 await getname(data.user.id);
-navigate("/");
+navigate("/dashboard");
 
   } catch (err) {
     console.error("Unexpected login error:", err);
