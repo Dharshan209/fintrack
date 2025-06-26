@@ -11,6 +11,7 @@ import './App.css';
 
 function Layout() {
   const location = useLocation();
+  // The header will still be hidden on the login and signup pages
   const hideHeaderPaths = ['/', '/signup'];
   const isLoginPage = hideHeaderPaths.includes(location.pathname);
 
@@ -20,6 +21,7 @@ function Layout() {
       {!isLoginPage && <Header />}
       <main className="main-content">
         <Routes>
+          {/* All routes are now public. */}
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
